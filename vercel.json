@@ -1,30 +1,10 @@
 {
   "version": 2,
   "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "build"  // Cambia questo se il tuo output della build ha un nome diverso
-      }
-    }
+    { "src": "package.json", "use": "@vercel/static-build" }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "http://localhost:3002", 
-      "headers": {
-        "Cache-Control": "s-maxage=0, stale-while-revalidate=30"
-      }
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html",
-      "headers": {
-        "Cache-Control": "s-maxage=0, stale-while-revalidate=60"
-      }
-    }
-  ],
-  "cleanUrls": true,
-  "trailingSlash": false
+    { "src": "/api/(.*)", "dest": "https://your-backend-url.onrender.com/api/$1" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
 }
